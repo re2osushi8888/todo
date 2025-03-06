@@ -1,15 +1,34 @@
-import { createClient } from '@libsql/client/.';
+import { createClient } from '@libsql/client';
+import { eq } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/libsql';
-import { Hono } from 'hono';
+import { usersTable } from './db/schema';
 
-
-const client = createClient({ url: process.env.DB_FILE_NAME! });
+const client = createClient({ url: process.env.DB_FILE_NAME as string });
 const db = drizzle({ client });
 
-const app = new Hono()
+async function main() {
+	const user: typeof usersTable.$inferInsert = {
+		name: 'John',
+		age: 30,
+		email: 'john@example.com',
+	};
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+	await db.insert(usersTable).values(user);
+	console.log('New user created!');
 
-export default app
+	const users = await db.select().from(usersTable);
+	console.log('Getting all users from the database: ', users);
+
+	await db
+		.update(usersTable)
+		.set({
+			age: 31,
+		})
+		.where(eq(usersTable.email, user.email));
+	console.log('User info updated!');
+
+	await db.delete(usersTable).where(eq(usersTable.email, user.email));
+	console.log('User deleted!');
+}
+
+main();
