@@ -1,3 +1,6 @@
+# todo
+todoアプリの作成を通していろいろな技術に触れてみるリポジトリ
+
 To install dependencies:
 ```sh
 bun install
