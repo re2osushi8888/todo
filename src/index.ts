@@ -22,4 +22,13 @@ app.post('/posts', (c) => {
 	);
 });
 
+app.get('/user', (c) => {
+	return c.json({
+		id: 1,
+		name: 'Allen',
+		age: 27,
+		email: 'allen@example.com',
+	});
+});
+
 export default app;
