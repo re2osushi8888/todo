@@ -28,10 +28,8 @@ app.get('/user', async (c) => {
 	const db = createDB();
 	const repository = new UserRepository(db);
 	const users = await repository.getAll();
-	// FIXME: select文かmodelを作らないといけない
-	const user = users[0];
 	return c.json({
-		user,
+		users,
 	});
 });
 

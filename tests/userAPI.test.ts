@@ -28,6 +28,22 @@ test('GET /user', async () => {
 
 	expect(res.status).toBe(200);
 	expect(await res.json()).toEqual({
+		users: [
+			{
+				id: 1,
+				name: 'Allen',
+				age: 27,
+				email: 'allen@example.com',
+			},
+		],
+	});
+});
+
+test('GET /user/:id', async () => {
+	const res = await app.request('user/1');
+
+	expect(res.status).toBe(200);
+	expect(await res.json()).toEqual({
 		user: {
 			id: 1,
 			name: 'Allen',
