@@ -32,5 +32,15 @@ app.get('/user', async (c) => {
 		users,
 	});
 });
+app.get('/user/:id', async (c) => {
+	const id = c.req.param('id');
+
+	const db = createDB();
+	const repository = new UserRepository(db);
+	const user = await repository.findById(Number(id));
+	return c.json({
+		user: user,
+	});
+});
 
 export default app;
