@@ -10,7 +10,7 @@ const sqlite = new Database(env.DATABASE_URL);
 const db = drizzleBunSqlite(sqlite);
 
 beforeAll(async () => {
-	migrate(db, { migrationsFolder: '/workspace/drizzle' });
+	migrate(db, { migrationsFolder: '/workspace/apps/hono-drizzle-api/drizzle' });
 
 	const user: typeof usersTable.$inferInsert = {
 		id: 1,
