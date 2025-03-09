@@ -4,12 +4,12 @@ import { drizzle as drizzleBunSqlite } from 'drizzle-orm/bun-sqlite';
 import { migrate } from 'drizzle-orm/bun-sqlite/migrator';
 import app from '../src';
 import { usersTable } from '../src/db/schema';
+import { env } from '../src/env';
 
-const sqlite = new Database('sqlite.db');
+const sqlite = new Database(env.DATABASE_URL);
 const db = drizzleBunSqlite(sqlite);
 
 beforeAll(async () => {
-	process.env.IS_TEST = 'True';
 	migrate(db, { migrationsFolder: '/workspace/drizzle' });
 
 	const user: typeof usersTable.$inferInsert = {
