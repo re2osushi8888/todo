@@ -5,7 +5,7 @@ export const env = createEnv({
 	server: {
 		DATABASE_URL: z.string(),
 	},
-
+	// biome-ignore lint: noProcessEnv
 	runtimeEnv: process.env,
 });
 

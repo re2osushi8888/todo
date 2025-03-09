@@ -2,9 +2,9 @@ import { createClient } from '@libsql/client';
 import { eq } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/libsql';
 import { usersTable } from './db/schema';
-import { env } from './env.js';
+import { env } from './env';
 
-const client = createClient({ url: env.DATABASE_URL as string });
+const client = createClient({ url: env.DATABASE_URL });
 const db = drizzle({ client });
 
 async function main() {
