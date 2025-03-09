@@ -39,6 +39,7 @@
 		"ghcr.io/devcontainers-community/npm-features/typescript:1": {},
 		"ghcr.io/devcontainers/features/git:1": {},
 		"ghcr.io/shyim/devcontainers-features/bun:0": {},
-    "ghcr.io/warrenbuckley/codespace-features/sqlite:1": {}
+		"ghcr.io/warrenbuckley/codespace-features/sqlite:1": {},
+		"ghcr.io/devcontainers-extra/features/lefthook-asdf:1": {}
 	}
 }
