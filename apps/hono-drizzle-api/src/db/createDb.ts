@@ -11,8 +11,8 @@ export type SqliteDB = BaseSQLiteDatabase<any, any, typeof schema>;
 
 export function createDB(): SqliteDB {
 	let db: SqliteDB;
-	if (env.DATABASE_URL === 'sqlite.db') {
-		const sqlite = new Database('sqlite.db');
+	if (env.APP_ENV === 'test') {
+		const sqlite = new Database(env.DATABASE_URL);
 		db = drizzleBunSqlite(sqlite);
 	} else {
 		const client = createClient({ url: env.DATABASE_URL as string });
