@@ -7,6 +7,9 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
+		"include": [
+			"src/**/*"
+		],
 		"ignore": []
 	},
 	"formatter": {
