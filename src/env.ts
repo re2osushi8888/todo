@@ -8,8 +8,3 @@ export const env = createEnv({
 	// biome-ignore lint: noProcessEnv
 	runtimeEnv: process.env,
 });
-
-function main() {
-	console.log(env.DATABASE_URL);
-}
-main();
