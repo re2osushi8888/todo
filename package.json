@@ -2,8 +2,8 @@
 	"name": "todo",
 	"type": "module",
 	"scripts": {
-		"dev": "bun run --hot src/index.ts",
-		"test": "bun --env-file .env.test test"
+		"dev": "bun run --env-file env/development.env --hot src/index.ts",
+		"test": "bun test --env-file env/test.env"
 	},
 	"dependencies": {
 		"@libsql/client": "^0.14.0",
