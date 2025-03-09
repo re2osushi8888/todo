@@ -2,6 +2,11 @@
   "compilerOptions": {
     "strict": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx"
+    "jsxImportSource": "hono/jsx",
+    "paths": {
+      "@t3-oss/env-core": [
+        "./node_modules/@t3-oss/env-core/dist"
+      ]
+    }
   }
 }

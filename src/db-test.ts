@@ -2,15 +2,16 @@ import { createClient } from '@libsql/client';
 import { eq } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/libsql';
 import { usersTable } from './db/schema';
+import { env } from './env.js';
 
-const client = createClient({ url: process.env.DB_FILE_NAME as string });
+const client = createClient({ url: env.DATABASE_URL as string });
 const db = drizzle({ client });
 
 async function main() {
 	const user: typeof usersTable.$inferInsert = {
 		name: 'John',
 		age: 30,
-		email: 'john@example.com',
+		email: 'john2@example.com',
 	};
 
 	await db.insert(usersTable).values(user);

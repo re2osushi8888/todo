@@ -14,7 +14,7 @@ export function createDB(): SqliteDB {
 		const sqlite = new Database('sqlite.db');
 		db = drizzleBunSqlite(sqlite);
 	} else {
-		const client = createClient({ url: process.env.DB_FILE_NAME as string });
+		const client = createClient({ url: process.env.DATABASE_URL as string });
 		db = drizzleSqlite({ client });
 	}
 	return db;
