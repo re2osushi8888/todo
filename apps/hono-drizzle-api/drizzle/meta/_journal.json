@@ -8,6 +8,13 @@
       "when": 1741529972755,
       "tag": "0000_illegal_spiral",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1741695177560,
+      "tag": "0001_foamy_random",
+      "breakpoints": true
     }
   ]
 }
