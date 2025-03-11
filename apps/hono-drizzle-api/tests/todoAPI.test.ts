@@ -1,4 +1,5 @@
-import { afterAll, beforeAll, describe, test } from 'bun:test';
+import { afterAll, beforeAll, describe, expect, test } from 'bun:test';
+import app from '../src';
 import { createTestDB } from '../src/db/createDb';
 import { todoItemsTable } from '../src/db/schema';
 
@@ -17,8 +18,20 @@ describe('todoAPI', async () => {
   describe('GET /todo', () => {
     test.todo('全てのtodoが取得できる')
   })
-  describe('POST /todo/:id', () => {
-    test.todo('todoを取得できる')
+  describe('GET /todo/:id', () => {
+    test('todoを取得できる',async () => {
+      const id = 1
+      const res = await app.request(`/todo/${id}`)
+
+      expect(res.status).toBe(200)
+      expect(await res.json()).toEqual({
+        todo: {
+          id: 1,
+          title: '掃除する',
+          isComplete: false
+        }
+      })
+    })
   })
   describe('PUT /todo/:id',() => {
     test.todo('タイトルを変更できる')
