@@ -1,17 +1,11 @@
-import { Database } from 'bun:sqlite';
 import { afterAll, beforeAll, expect, test } from 'bun:test';
-import { drizzle as drizzleBunSqlite } from 'drizzle-orm/bun-sqlite';
-import { migrate } from 'drizzle-orm/bun-sqlite/migrator';
 import app from '../src';
+import { createTestDB } from '../src/db/createDb';
 import { usersTable } from '../src/db/schema';
-import { env } from '../src/env';
 
-const sqlite = new Database(env.DATABASE_URL);
-const db = drizzleBunSqlite(sqlite);
 
+const db = createTestDB()
 beforeAll(async () => {
-	migrate(db, { migrationsFolder: '/workspace/apps/hono-drizzle-api/drizzle' });
-
 	const user: typeof usersTable.$inferInsert = {
 		id: 1,
 		name: 'Allen',
