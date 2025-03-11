@@ -1,5 +1,6 @@
 import { Hono } from 'hono';
 import { createDB } from './db/createDb';
+import { TodoRepository } from './repository/todoRepository';
 import { UserRepository } from './repository/userRepository';
 
 const app = new Hono();
@@ -45,12 +46,11 @@ app.get('/user/:id', async (c) => {
 
 app.get('/todo/:id', async (c) => {
 	const id = Number(c.req.param('id'));
+	const db = createDB()
+	const repository = new TodoRepository(db)
+	const todo = await repository.getById(id)
 	return c.json({
-		todo: {
-			id: id,
-			title: '掃除する',
-			isComplete: false,
-		},
+		todo: todo
 	});
 });
 
