@@ -44,14 +44,14 @@ app.get('/user/:id', async (c) => {
 });
 
 app.get('/todo/:id', async (c) => {
-	const id = Number(c.req.param('id'))
+	const id = Number(c.req.param('id'));
 	return c.json({
 		todo: {
-			'id': id,
-			'title': '掃除する',
-			'isComplete': false
-		}
-	})
-})
+			id: id,
+			title: '掃除する',
+			isComplete: false,
+		},
+	});
+});
 
 export default app;
