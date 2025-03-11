@@ -6,3 +6,9 @@ export const usersTable = sqliteTable('users_table', {
 	age: int().notNull(),
 	email: text().notNull().unique(),
 });
+
+export const todoItemsTable = sqliteTable('todoItems_table',{
+	id: int().primaryKey({ autoIncrement:true }).default(1),
+	title: text(),
+	isComplete: int({ mode: 'boolean'}).default(false)
+})
