@@ -48,7 +48,7 @@ app.get('/todo/:id', async (c) => {
 	const id = Number(c.req.param('id'));
 	const db = createDB()
 	const repository = new TodoRepository(db)
-	const todo = await repository.getById(id)
+	const todo = await repository.findById(id)
 	return c.json({
 		todo: todo
 	});

@@ -7,7 +7,7 @@ export class TodoRepository {
 		this.db = db;
 	}
 
-	getById(id: number): typeof todoItemsTable.$inferSelect {
+	findById(id: number): typeof todoItemsTable.$inferSelect {
 		return {
 			id: id,
 			title: '掃除する',
