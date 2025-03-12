@@ -34,11 +34,13 @@ describe('todoAPI', async () => {
         }
       })
     })
+    test.todo('存在しないidを入力すると404')
   })
   describe('PUT /todo/:id',() => {
     test.todo('タイトルを変更できる')
     test.todo('状態を[完了]にできる')
     test.todo('状態を[未完了]にできる')
+    test.todo('idは変更できない')
   })
   describe('DELETE /todo/:id', () => {
     test.todo('DBから削除できる')
