@@ -1,5 +1,6 @@
+import { eq } from 'drizzle-orm';
 import type { SqliteDB } from '../db/createDb';
-import type { todoItemsTable } from '../db/schema';
+import { todoItemsTable } from '../db/schema';
 
 export class TodoRepository {
 	private db: SqliteDB;
@@ -7,11 +8,8 @@ export class TodoRepository {
 		this.db = db;
 	}
 
-	findById(id: number): typeof todoItemsTable.$inferSelect {
-		return {
-			id: id,
-			title: '掃除する',
-			isComplete: false,
-		};
+	async findById(id: number): Promise<(typeof todoItemsTable.$inferSelect)> {
+		const todo = this.db.select().from(todoItemsTable).where(eq(todoItemsTable.id, id)).get()
+		return todo
 	}
 }
