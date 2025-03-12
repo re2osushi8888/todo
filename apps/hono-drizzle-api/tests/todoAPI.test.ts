@@ -1,16 +1,16 @@
-import { afterAll, beforeAll, describe, expect, test } from 'bun:test';
+import { afterAll, describe, expect, test } from 'bun:test';
 import app from '../src';
-import { createTestDB } from '../src/db/createDb';
+import { createTestDB, type SqliteDB } from '../src/db/createDb';
 import { todoItemsTable } from '../src/db/schema';
+
+
 
 describe('todoAPI', async () => {
   const db = createTestDB()
-  beforeAll(async () => {
-    const cleanTodo: typeof todoItemsTable.$inferInsert = {
-      title: '掃除する',
-    };
-    await db.insert(todoItemsTable).values(cleanTodo)
-  })
+  const createTodo = async (title: string, db: SqliteDB) => {
+    await db.insert(todoItemsTable).values({title: title})
+  }
+
   afterAll(async () => {
     await db.delete(todoItemsTable)
   })
@@ -20,14 +20,16 @@ describe('todoAPI', async () => {
   })
   describe('GET /todo/:id', () => {
     test('todoを取得できる',async () => {
-      const id = 1
-      const res = await app.request(`/todo/${id}`)
+      const title = '掃除する'
+      await createTodo(title, db)
+
+      const res = await app.request(`/todo/1`)
 
       expect(res.status).toBe(200)
       expect(await res.json()).toEqual({
         todo: {
           id: 1,
-          title: '掃除する',
+          title: title,
           isComplete: false
         }
       })
