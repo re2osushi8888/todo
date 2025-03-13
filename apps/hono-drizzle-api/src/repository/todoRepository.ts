@@ -8,8 +8,15 @@ export class TodoRepository {
 		this.db = db;
 	}
 
-	async findById(id: number): Promise<(typeof todoItemsTable.$inferSelect)> {
-		const todo = this.db.select().from(todoItemsTable).where(eq(todoItemsTable.id, id)).get()
-		return todo
+	async findById(id: number): Promise<typeof todoItemsTable.$inferSelect> {
+		const todo = this.db
+			.select()
+			.from(todoItemsTable)
+			.where(eq(todoItemsTable.id, id))
+			.get();
+		return todo;
+	}
+	async update(todo: typeof todoItemsTable.$inferInsert) {
+		// await this.db.update(todoItemsTable).set(todo).returning();
 	}
 }

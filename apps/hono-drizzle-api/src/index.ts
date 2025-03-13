@@ -1,5 +1,6 @@
 import { Hono } from 'hono';
 import { createDB } from './db/createDb';
+import type { todoItemsTable } from './db/schema';
 import { TodoRepository } from './repository/todoRepository';
 import { UserRepository } from './repository/userRepository';
 
@@ -46,12 +47,26 @@ app.get('/user/:id', async (c) => {
 
 app.get('/todo/:id', async (c) => {
 	const id = Number(c.req.param('id'));
-	const db = createDB()
-	const repository = new TodoRepository(db)
-	const todo = await repository.findById(id)
+	const db = createDB();
+	const repository = new TodoRepository(db);
+	const todo = await repository.findById(id);
 	return c.json({
-		todo: todo
+		todo: todo,
 	});
+});
+
+app.patch('/todo/:id', async (c) => {
+	// const id = Number(c.req.param('id'));
+	// const requestBody = await c.req.json();
+	// const updateTodo: typeof todoItemsTable.$inferInsert = {
+	// 	id: id,
+	// 	...requestBody['todo'],
+	// };
+	// console.log(updateTodo);
+	// const db = createDB();
+	// const repository = new TodoRepository(db);
+	// const updatedTodo = await repository.update(requestBody);
+	return ;
 });
 
 export default app;

@@ -23,7 +23,7 @@ describe('todoAPI', async () => {
       const title = '掃除する'
       await createTodo(title, db)
 
-      const res = await app.request(`/todo/1`)
+      const res = await app.request('/todo/1')
 
       expect(res.status).toBe(200)
       expect(await res.json()).toEqual({
@@ -36,11 +36,31 @@ describe('todoAPI', async () => {
     })
     test.todo('存在しないidを入力すると404')
   })
-  describe('PUT /todo/:id',() => {
+  describe('PATCH /todo/:id',() => {
     test.todo('タイトルを変更できる')
-    test.todo('状態を[完了]にできる')
+    test('状態を[完了]にできる', async () => {
+
+      const res = await app.request('/todo/1', {
+        method: 'PATCH',
+        body: JSON.stringify({
+          todo: {
+            is_complete: true
+          }
+         })
+      })
+
+      expect(res.status).toBe(200)
+      expect(await res.json()).toEqual({
+        todo: {
+          id: 1,
+          title: '掃除する',
+          is_complete: true,
+        }}
+      );
+    })
     test.todo('状態を[未完了]にできる')
     test.todo('idは変更できない')
+    test.todo('存在しないidは404エラー')
   })
   describe('DELETE /todo/:id', () => {
     test.todo('DBから削除できる')
