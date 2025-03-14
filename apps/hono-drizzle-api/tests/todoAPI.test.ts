@@ -39,6 +39,8 @@ describe('todoAPI', async () => {
   describe('PATCH /todo/:id',() => {
     test.todo('タイトルを変更できる')
     test('状態を[完了]にできる', async () => {
+      const title = '掃除する'
+      await createTodo(title, db)
 
       const res = await app.request('/todo/1', {
         method: 'PATCH',

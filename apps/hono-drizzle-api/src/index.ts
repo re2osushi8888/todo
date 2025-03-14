@@ -55,23 +55,19 @@ app.get('/todo/:id', async (c) => {
 });
 
 app.patch('/todo/:id', async (c) => {
-	// const id = Number(c.req.param('id'));
-	// const requestBody = await c.req.json();
-	// const updateTodo: typeof todoItemsTable.$inferInsert = {
-	// 	id: id,
-	// 	...requestBody['todo'],
-	// };
-	// console.log(updateTodo);
-	// const db = createDB();
-	// const repository = new TodoRepository(db);
-	// const updatedTodo = await repository.update(requestBody);
+	const id = Number(c.req.param('id'));
+	const requestBody = await c.req.json();
+	const updateTodo: typeof todoItemsTable.$inferInsert = {
+		id: id,
+		...requestBody['todo'],
+	};
+	console.log(updateTodo);
+	const db = createDB();
+	const repository = new TodoRepository(db);
+	const updatedTodo = await repository.update(requestBody);
 	return c.json(
 		{
-			todo: {
-				id: 1,
-				is_complete: true,
-				title: '掃除する',
-			},
+			todo: updatedTodo,
 		},
 		200,
 	);

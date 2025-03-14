@@ -17,6 +17,6 @@ export class TodoRepository {
 		return todo;
 	}
 	async update(todo: typeof todoItemsTable.$inferInsert) {
-		// await this.db.update(todoItemsTable).set(todo).returning();
+		await this.db.update(todoItemsTable).set(todo);
 	}
 }
