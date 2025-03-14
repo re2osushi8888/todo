@@ -1,6 +1,5 @@
 import { Hono } from 'hono';
 import { createDB } from './db/createDb';
-import type { todoItemsTable } from './db/schema';
 import { TodoRepository } from './repository/todoRepository';
 import { UserRepository } from './repository/userRepository';
 
@@ -66,7 +65,16 @@ app.patch('/todo/:id', async (c) => {
 	// const db = createDB();
 	// const repository = new TodoRepository(db);
 	// const updatedTodo = await repository.update(requestBody);
-	return ;
+	return c.json(
+		{
+			todo: {
+				id: 1,
+				is_complete: true,
+				title: '掃除する',
+			},
+		},
+		200,
+	);
 });
 
 export default app;
