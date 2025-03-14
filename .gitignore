@@ -8,3 +8,5 @@ env/test.env
 # sqlite
 **sqlite**
 
+# pnpm
+.pnpm-store
