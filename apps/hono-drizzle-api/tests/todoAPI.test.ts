@@ -16,22 +16,28 @@ describe('todoAPI', async () => {
   })
 
   describe('GET /todo', () => {
-    test.todo('全てのtodoが取得できる')
-  })
-  describe('GET /todo/:id', () => {
-    test('todoを取得できる',async () => {
-      const title = '掃除する'
-      await createTodo(title, db)
+    test('全てのtodoが取得できる',async () => {
+      const todo1 = await createTodo('掃除', db)
+      const todo2 = await createTodo('洗濯', db)
+      const todo3 = await createTodo('料理', db)
 
-      const res = await app.request('/todo/1')
+      const res = await app.request('/todo')
 
       expect(res.status).toBe(200)
       expect(await res.json()).toEqual({
-        todo: {
-          id: 1,
-          title: title,
-          isComplete: false
-        }
+        todos: [todo1,todo2,todo3]
+      })
+    })
+  })
+  describe('GET /todo/:id', () => {
+    test('todoを取得できる',async () => {
+      const todo =  await createTodo('掃除する', db)
+
+      const res = await app.request(`/todo/${todo.id}`)
+
+      expect(res.status).toBe(200)
+      expect(await res.json()).toEqual({
+        todo: todo
       })
     })
     test.todo('存在しないidを入力すると404')

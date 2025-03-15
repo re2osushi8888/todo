@@ -8,7 +8,7 @@ export const usersTable = sqliteTable('users_table', {
 });
 
 export const todoItemsTable = sqliteTable('todoItems_table', {
-	id: int().primaryKey({ autoIncrement: true }).default(1),
+	id: int().primaryKey({ autoIncrement: true }),
 	title: text(),
 	isComplete: int({ mode: 'boolean' }).default(false),
 });

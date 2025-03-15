@@ -45,6 +45,14 @@ app.get('/user/:id', async (c) => {
 	});
 });
 
+app.get('/todo', async (c) => {
+	const db = createDB();
+	const repository = new TodoRepository(db);
+	const todos = await repository.findAll();
+
+	return c.json({ todos });
+});
+
 app.get('/todo/:id', async (c) => {
 	const id = Number(c.req.param('id'));
 	const db = createDB();

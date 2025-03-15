@@ -8,6 +8,11 @@ export class TodoRepository {
 		this.db = db;
 	}
 
+	async findAll() {
+		const todos = await this.db.select().from(todoItemsTable);
+		return todos;
+	}
+
 	async findById(id: number): Promise<typeof todoItemsTable.$inferSelect> {
 		const todo = this.db
 			.select()
