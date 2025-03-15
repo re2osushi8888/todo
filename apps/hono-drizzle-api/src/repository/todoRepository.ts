@@ -16,7 +16,13 @@ export class TodoRepository {
 			.get();
 		return todo;
 	}
-	async update(todo: typeof todoItemsTable.$inferInsert) {
-		await this.db.update(todoItemsTable).set(todo);
+	async update(id: number, todo: typeof todoItemsTable.$inferInsert) {
+		const updatedTodo = await this.db
+			.update(todoItemsTable)
+			.set({ isComplete: todo.isComplete })
+			.where(eq(todoItemsTable.id, id))
+			.returning()
+			.get();
+		return updatedTodo;
 	}
 }

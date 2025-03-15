@@ -1,4 +1,4 @@
-import { afterAll, describe, expect, test } from 'bun:test';
+import { afterEach, describe, expect, test } from 'bun:test';
 import app from '../src';
 import { createTestDB, type SqliteDB } from '../src/db/createDb';
 import { todoItemsTable } from '../src/db/schema';
@@ -8,10 +8,10 @@ import { todoItemsTable } from '../src/db/schema';
 describe('todoAPI', async () => {
   const db = createTestDB()
   const createTodo = async (title: string, db: SqliteDB) => {
-    await db.insert(todoItemsTable).values({title: title})
+    return await db.insert(todoItemsTable).values({title: title}).returning().get()
   }
 
-  afterAll(async () => {
+  afterEach(async () => {
     await db.delete(todoItemsTable)
   })
 
@@ -39,24 +39,21 @@ describe('todoAPI', async () => {
   describe('PATCH /todo/:id',() => {
     test.todo('タイトルを変更できる')
     test('状態を[完了]にできる', async () => {
-      const title = '掃除する'
-      await createTodo(title, db)
+      const createdTodo = await createTodo('掃除する', db)
 
-      const res = await app.request('/todo/1', {
+      const res = await app.request(`/todo/${createdTodo.id}`, {
         method: 'PATCH',
         body: JSON.stringify({
-          todo: {
-            is_complete: true
-          }
+            isComplete: true
          })
       })
 
       expect(res.status).toBe(200)
       expect(await res.json()).toEqual({
         todo: {
-          id: 1,
-          title: '掃除する',
-          is_complete: true,
+          id: createdTodo.id,
+          title: createdTodo.title,
+          isComplete: true,
         }}
       );
     })
