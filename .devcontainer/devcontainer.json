@@ -3,6 +3,9 @@
 	"image": "mcr.microsoft.com/devcontainers/typescript-node:22",
 	"workspaceFolder": "/workspace",
 	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+	"forwardPorts": [
+		3000
+	],
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -41,6 +44,7 @@
 		"ghcr.io/devcontainers/features/git:1": {},
 		"ghcr.io/shyim/devcontainers-features/bun:0": {},
 		"ghcr.io/warrenbuckley/codespace-features/sqlite:1": {},
-		"ghcr.io/devcontainers-extra/features/lefthook-asdf:1": {}
+		"ghcr.io/devcontainers-extra/features/lefthook-asdf:1": {},
+		"ghcr.io/devcontainers-extra/features/nestjs-cli:2": {}
 	}
 }
