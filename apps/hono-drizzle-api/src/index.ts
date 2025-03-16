@@ -63,6 +63,14 @@ app.get('/todo/:id', async (c) => {
 	});
 });
 
+app.post('/todo', async (c) => {
+	const body = await c.req.json<typeof todoItemsTable.$inferInsert>();
+	const db = createDB();
+	const repository = new TodoRepository(db);
+	const newTodo = await repository.save(body);
+	return c.json({ message: 'Success', todo: newTodo }, 201);
+});
+
 app.patch('/todo/:id', async (c) => {
 	const id = Number(c.req.param('id'));
 	const body = await c.req.json<typeof todoItemsTable.$inferInsert>();

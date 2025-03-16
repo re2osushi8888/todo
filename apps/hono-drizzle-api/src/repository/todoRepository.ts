@@ -21,6 +21,16 @@ export class TodoRepository {
 			.get();
 		return todo;
 	}
+
+	async save(todo: typeof todoItemsTable.$inferInsert) {
+		const newTodo: typeof todoItemsTable.$inferSelect = await this.db
+			.insert(todoItemsTable)
+			.values(todo)
+			.returning()
+			.get();
+		return newTodo;
+	}
+
 	async update(id: number, todo: typeof todoItemsTable.$inferInsert) {
 		const updatedTodo = await this.db
 			.update(todoItemsTable)

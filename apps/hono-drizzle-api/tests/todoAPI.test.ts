@@ -42,6 +42,28 @@ describe('todoAPI', async () => {
     })
     test.todo('存在しないidを入力すると404')
   })
+  describe('POST /todo', () => {
+    test('todoを作成でできる', async () => {
+      const res = await app.request('/todo', {
+        method: 'POST',
+        body: JSON.stringify({
+          title: '作成する'
+        })
+      })
+
+      expect(res.status).toBe(201)
+      expect(await res.json()).toEqual(
+        {
+          message: 'Success',
+          todo: expect.objectContaining({
+            id: expect.any(Number),
+            title: '作成する',
+            isComplete: false
+          })
+        }
+      )
+    })
+  })
   describe('PATCH /todo/:id',() => {
     test.todo('タイトルを変更できる')
     test('状態を[完了]にできる', async () => {
