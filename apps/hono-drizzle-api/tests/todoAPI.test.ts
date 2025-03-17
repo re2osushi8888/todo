@@ -65,7 +65,26 @@ describe('todoAPI', async () => {
     })
   })
   describe('PATCH /todo/:id',() => {
-    test.todo('タイトルを変更できる')
+    test('タイトルを変更できる', async () => {
+      const todo = await createTodo('掃除する', db)
+      const newTitle = '皿洗い'
+
+      const res = await app.request(`/todo/${todo.id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({
+          title: newTitle
+        })
+      })
+
+      expect(res.status).toBe(200)
+      expect(await res.json()).toEqual({
+        todo: {
+          id: todo.id,
+          title: newTitle,
+          isComplete: false
+        }
+      })
+    })
     test('状態を[完了]にできる', async () => {
       const createdTodo = await createTodo('掃除する', db)
 
