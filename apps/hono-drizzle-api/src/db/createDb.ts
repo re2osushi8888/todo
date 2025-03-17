@@ -13,6 +13,7 @@ export type SqliteDB = BaseSQLiteDatabase<any, any, typeof schema>;
 export function createDB(): SqliteDB {
 	let db: SqliteDB;
 	if (env.APP_ENV === 'test') {
+		// テストの時は自作のモックDBにするのもアリ
 		const sqlite = new Database(env.DATABASE_URL);
 		db = drizzleBunSqlite(sqlite);
 	} else {
