@@ -8,7 +8,8 @@ import { todoItemsTable } from '../src/db/schema';
 describe('todoAPI', async () => {
   const db = createTestDB()
   const createTodo = async (title: string, db: SqliteDB) => {
-    return await db.insert(todoItemsTable).values({title: title}).returning().get()
+    const todo: typeof todoItemsTable.$inferSelect = await db.insert(todoItemsTable).values({title: title}).returning().get()
+    return todo
   }
 
   afterEach(async () => {
@@ -81,10 +82,11 @@ describe('todoAPI', async () => {
         todo: {
           id: todo.id,
           title: newTitle,
-          isComplete: false
+          isComplete: todo
         }
       })
     })
+
     test('状態を[完了]にできる', async () => {
       const createdTodo = await createTodo('掃除する', db)
 
