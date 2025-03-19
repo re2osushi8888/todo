@@ -76,7 +76,17 @@ app.patch('/todo/:id', async (c) => {
 	const body = await c.req.json<typeof todoItemsTable.$inferInsert>();
 	const db = createDB();
 	const repository = new TodoRepository(db);
-	const updatedTodo = await repository.update(id, body);
+
+	let updatedTodo: typeof todoItemsTable.$inferInsert = {
+		id: id,
+		...body,
+	};
+	if (body.isComplete) {
+		updatedTodo = await repository.update(id, body);
+	}
+	if (body.title) {
+		updatedTodo = await repository.titleUpdate(id, body);
+	}
 	return c.json(
 		{
 			todo: updatedTodo,

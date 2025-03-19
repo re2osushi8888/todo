@@ -82,7 +82,7 @@ describe('todoAPI', async () => {
         todo: {
           id: todo.id,
           title: newTitle,
-          isComplete: todo
+          isComplete: todo.isComplete
         }
       })
     })

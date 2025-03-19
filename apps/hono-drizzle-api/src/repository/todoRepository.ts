@@ -40,4 +40,14 @@ export class TodoRepository {
 			.get();
 		return updatedTodo;
 	}
+
+	async titleUpdate(id: number, todo: typeof todoItemsTable.$inferInsert) {
+		const updatedTodo = await this.db
+			.update(todoItemsTable)
+			.set({ title: todo.title })
+			.where(eq(todoItemsTable.id, id))
+			.returning()
+			.get();
+		return updatedTodo;
+	}
 }
