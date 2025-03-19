@@ -32,13 +32,25 @@ export class TodoRepository {
 	}
 
 	async update(id: number, todo: typeof todoItemsTable.$inferInsert) {
-		const updatedTodo = await this.db
+		let updateTodo: typeof todoItemsTable.$inferSelect
+		if (todo.isComplete) {
+			const updatedTodo = await this.db
 			.update(todoItemsTable)
 			.set({ isComplete: todo.isComplete })
 			.where(eq(todoItemsTable.id, id))
 			.returning()
 			.get();
-		return updatedTodo;
+			return updatedTodo
+		}
+		if (todo.title){
+			const updatedTodo = await this.db
+			.update(todoItemsTable)
+			.set({ title: todo.title })
+			.where(eq(todoItemsTable.id, id))
+			.returning()
+			.get();
+			return updatedTodo;
+		}
 	}
 
 	async titleUpdate(id: number, todo: typeof todoItemsTable.$inferInsert) {
