@@ -33,7 +33,7 @@ export class TodoRepository {
 
 	async update(id: number, todo: typeof todoItemsTable.$inferInsert) {
 		let updateTodo: typeof todoItemsTable.$inferSelect
-		if (todo.isComplete) {
+		if ("isComplete" in todo) {
 			const updatedTodo = await this.db
 			.update(todoItemsTable)
 			.set({ isComplete: todo.isComplete })
