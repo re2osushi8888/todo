@@ -35,7 +35,7 @@ export class TodoRepository {
 		const todoEntries = Object.entries(todo);
 		const todoFields = Object.fromEntries(todoEntries);
 
-		const updatedTodo = await this.db
+		const updatedTodo: typeof todoItemsTable.$inferSelect = await this.db
 			.update(todoItemsTable)
 			.set(todoFields)
 			.where(eq(todoItemsTable.id, id))
