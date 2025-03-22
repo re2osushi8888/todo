@@ -14,7 +14,7 @@
 	},
 	"formatter": {
 		"enabled": true,
-		"indentStyle": "tab"
+		"indentStyle": "space"
 	},
 	"organizeImports": {
 		"enabled": true
@@ -32,5 +32,21 @@
 		"formatter": {
 			"quoteStyle": "single"
 		}
-	}
+	},
+	"overrides": [
+		{
+			"include": [
+				// TODO:nestのapiディレクトリ配下に変更する
+				"src/**"
+			],
+			"linter": {
+				"rules": {
+					"style": {
+						"useImportType": "off",
+						"useNodejsImportProtocol": "off"
+					}
+				}
+			}
+		}
+	]
 }
