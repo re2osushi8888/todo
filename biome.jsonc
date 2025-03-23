@@ -10,7 +10,9 @@
 		"include": [
 			"src/**/*"
 		],
-		"ignore": []
+		"ignore": [
+			"dist/**/*"
+		]
 	},
 	"formatter": {
 		"enabled": true,
