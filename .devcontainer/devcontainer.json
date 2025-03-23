@@ -14,7 +14,8 @@
 				"yoavbls.pretty-ts-errors",
 				"streetsidesoftware.code-spell-checker",
 				"biomejs.biome",
-				"ms-playwright.playwright"
+				"ms-playwright.playwright",
+				"vitest.explorer"
 			],
 			"settings": {
 				"editor.formatOnSave": true,
