@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "types": [
+      "vitest/globals"
+    ],
     "module": "NodeNext",
     "moduleResolution": "nodenext",
     "declaration": true,
