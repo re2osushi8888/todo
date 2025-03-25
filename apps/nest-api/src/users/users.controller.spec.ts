@@ -13,6 +13,7 @@ describe('UsersController', () => {
     controller = module.get<UsersController>(UsersController);
   });
 
+  // TODO: serviceの注入の仕方を確認する
   it.skip('should be defined', () => {
     expect(controller).toBeDefined();
   });
