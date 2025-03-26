@@ -4,11 +4,11 @@ import { ItemsService } from './items.service';
 
 @Controller('items')
 export class ItemsController {
-  constructor(private readonly ItemsService: ItemsService) {}
+  constructor(private readonly itemsService: ItemsService) {}
 
   @Get()
-  findAll() {
-    return 'This is findAll';
+  findAll(): Item[] {
+    return this.itemsService.findAll();
   }
 
   @Post()
@@ -25,6 +25,6 @@ export class ItemsController {
       description,
       status: 'ON_SALE',
     };
-    return this.ItemsService.create(item);
+    return this.itemsService.create(item);
   }
 }
