@@ -1,6 +1,8 @@
 {
 	"name": "nest-todo",
-	"dockerComposeFile": ["../../apps/nest-api/docker-compose.yml"],
+	"dockerComposeFile": [
+		"../../apps/nest-api/docker-compose.yml"
+	],
 	"service": "nest",
 	"workspaceFolder": "/workspace",
 	"forwardPorts": [
@@ -15,7 +17,8 @@
 				"streetsidesoftware.code-spell-checker",
 				"biomejs.biome",
 				"ms-playwright.playwright",
-				"vitest.explorer"
+				"vitest.explorer",
+				"Prisma.prisma"
 			],
 			"settings": {
 				"editor.formatOnSave": true,
