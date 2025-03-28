@@ -9,11 +9,11 @@ export class ItemsService {
 
   private items: Item[] = [];
 
-  findAll(): Item[] {
-    return this.items;
+  async findAll(): Promise<Item[]> {
+    return await this.prismaService.item.findMany();
   }
 
-  findById(id: string): Item | undefined {
+  findById(id: string): Item {
     const found = this.items.find((item) => item.id === id);
     if (!found) {
       throw new NotFoundException();
