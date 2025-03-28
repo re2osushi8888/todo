@@ -18,7 +18,8 @@
 				"biomejs.biome",
 				"ms-playwright.playwright",
 				"vitest.explorer",
-				"Prisma.prisma"
+				"Prisma.prisma",
+				"humao.rest-client"
 			],
 			"settings": {
 				"editor.formatOnSave": true,
