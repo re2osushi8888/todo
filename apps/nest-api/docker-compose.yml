@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  nest:
+    image: "mcr.microsoft.com/devcontainers/typescript-node:22"
+    command: sleep infinity
+    volumes:
+      - ../../:/workspace:cached
+    ports:
+      - 3000:3000
+    networks:
+      - nest-app-network
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./docker/postgres/init.d:/docker-entrypoint-initdb.d
+      - ./docker/postgres/pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: nestjsuser
+      POSTGRES_PASSWORD: nestjspass
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+      POSTGRES_DB: fleamarket
+    hostname: postgres
+    restart: always
+    user: root
+    networks:
+      - nest-app-network
+
+networks:
+  nest-app-network:
+    driver: bridge

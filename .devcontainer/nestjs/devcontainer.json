@@ -1,8 +1,8 @@
 {
-	"name": "todo",
-	"image": "mcr.microsoft.com/devcontainers/typescript-node:22",
+	"name": "nest-todo",
+	"dockerComposeFile": ["../../apps/nest-api/docker-compose.yml"],
+	"service": "nest",
 	"workspaceFolder": "/workspace",
-	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
 	"forwardPorts": [
 		3000
 	],
@@ -46,6 +46,7 @@
 		"ghcr.io/shyim/devcontainers-features/bun:0": {},
 		"ghcr.io/warrenbuckley/codespace-features/sqlite:1": {},
 		"ghcr.io/devcontainers-extra/features/lefthook-asdf:1": {},
-		"ghcr.io/devcontainers-extra/features/nestjs-cli:2": {}
+		"ghcr.io/devcontainers-extra/features/nestjs-cli:2": {},
+		"ghcr.io/robbert229/devcontainer-features/postgresql-client:1": {}
 	}
 }
