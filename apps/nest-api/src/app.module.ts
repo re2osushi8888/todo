@@ -5,8 +5,8 @@ import { AppService } from './app.service';
 import { ItemsController } from './items/items.controller';
 import { ItemsModule } from './items/items.module';
 import { ItemsService } from './items/items.service';
-import { UsersModule } from './users/users.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [ConfigModule.forRoot(), UsersModule, ItemsModule, PrismaModule],
