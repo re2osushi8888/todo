@@ -1,5 +1,11 @@
 ### GET
+### FindAll
 GET http://localhost:3000/items
+
+### FindById
+@itemId = 4a4c7955-5f89-4f21-946e-c14e9ca45bc4
+GET http://localhost:3000/items/{{itemId}}
+
 
 ### POST
 POST http://localhost:3000/items
