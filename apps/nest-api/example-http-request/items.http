@@ -20,3 +20,6 @@ Content-Type: application/json
 
 ### PUT
 PUT {{baseUrl}}/items/{{itemId}}
+
+### DELETE
+DELETE {{baseUrl}}/items/{{itemId}}
