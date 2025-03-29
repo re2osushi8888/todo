@@ -5,7 +5,8 @@ import {
   Get,
   Param,
   ParseUUIDPipe,
-  Post
+  Post,
+  Put,
 } from '@nestjs/common';
 import { Item } from '@prisma/client';
 import { CreateItemDto } from 'src/dto/create-item.dto';
@@ -30,10 +31,10 @@ export class ItemsController {
     return await this.itemsService.create(createItemDto);
   }
 
-  // @Put(':id')
-  // updateStatus(@Param('id', ParseUUIDPipe) id: string) {
-  //   return this.itemsService.updateStatus(id);
-  // }
+  @Put(':id')
+  async updateStatus(@Param('id', ParseUUIDPipe) id: string) {
+    return await this.itemsService.updateStatus(id);
+  }
 
   @Delete(':id')
   delete(@Param('id', ParseUUIDPipe) id: string) {

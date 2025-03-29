@@ -1,17 +1,22 @@
+@baseUrl = http://localhost:3000
+
 ### GET
 ### FindAll
-GET http://localhost:3000/items
+GET {{baseUrl}}/items
 
 ### FindById
 @itemId = 4a4c7955-5f89-4f21-946e-c14e9ca45bc4
-GET http://localhost:3000/items/{{itemId}}
+GET {{baseUrl}}/items/{{itemId}}
 
 
 ### POST
-POST http://localhost:3000/items
+POST {{baseUrl}}/items
 Content-Type: application/json
 
 {
   "name": "test2",
   "price": 456
 }
+
+### PUT
+PUT {{baseUrl}}/items/{{itemId}}

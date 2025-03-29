@@ -33,12 +33,16 @@ export class ItemsService {
     });
   }
 
-  // updateStatus(id: string): Item | undefined {
-  //   const item = this.findById(id);
-  //   if (item === undefined) return;
-  //   item.status = 'SOLD_OUT';
-  //   return item;
-  // }
+  async updateStatus(id: string): Promise<Item> {
+    return await this.prismaService.item.update({
+      data: {
+        status: 'SOLD_OUT',
+      },
+      where: {
+        id,
+      },
+    });
+  }
 
   delete(id: string) {
     this.items = this.items.filter((items) => items.id !== id);
