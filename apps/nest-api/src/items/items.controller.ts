@@ -1,15 +1,15 @@
 import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  ParseUUIDPipe,
-  Post,
-  Put,
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Param,
+    ParseUUIDPipe,
+    Post,
+    Put,
 } from '@nestjs/common';
 import { Item } from '@prisma/client';
-import { CreateItemDto } from 'src/dto/create-item.dto';
+import { CreateItemDto } from 'src/items/dto/create-item.dto';
 import { ItemsService } from './items.service';
 
 @Controller('items')
