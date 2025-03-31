@@ -2,13 +2,24 @@ version: "3.8"
 services:
   nest:
     image: "mcr.microsoft.com/devcontainers/typescript-node:22"
-    command: sleep infinity
+    command:
+      - /bin/bash
+      - -c
+      - |
+        echo "wait for db..."
+        /workspace/apps/nest-api/wait-for-it.sh postgres:5432
+        echo "db migration..."
+        npx prisma migrate deploy --schema=/workspace/apps/nest-api/prisma/schema.prisma
+        echo "start..."
+        sleep infinity
     volumes:
       - ../../:/workspace:cached
     ports:
       - 3000:3000
     networks:
       - nest-app-network
+    environment:
+      DATABASE_URL: "postgresql://nestjsuser:nestjspass@postgres:5432/fleamarket?schema=public"
     depends_on:
       - postgres
 
