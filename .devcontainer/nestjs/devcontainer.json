@@ -20,7 +20,8 @@
 				"ms-playwright.playwright",
 				"vitest.explorer",
 				"Prisma.prisma",
-				"humao.rest-client"
+				"humao.rest-client",
+				"ms-azuretools.vscode-docker"
 			],
 			"settings": {
 				"editor.formatOnSave": true,
