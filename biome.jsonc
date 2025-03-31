@@ -8,10 +8,14 @@
 	"files": {
 		"ignoreUnknown": false,
 		"include": [
-			"src/**/*"
+			"src/**/*",
+			"app/**/*.ts",
+			"app/**/*.tsx"
 		],
 		"ignore": [
-			"dist/**/*"
+			"dist/**/*",
+			"node_modules/**/*",
+			".next/"
 		]
 	},
 	"formatter": {
