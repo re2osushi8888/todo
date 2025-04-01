@@ -21,7 +21,8 @@
 				"vitest.explorer",
 				"Prisma.prisma",
 				"humao.rest-client",
-				"ms-azuretools.vscode-docker"
+				"ms-azuretools.vscode-docker",
+				"deinsoftware.arrow-function-snippets"
 			],
 			"settings": {
 				"editor.formatOnSave": true,
