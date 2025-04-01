@@ -4,6 +4,7 @@ import { z } from 'zod';
 export const env = createEnv({
   server: {
     PORT: z.string(),
+    JWT_SECRET: z.string(),
   },
   // biome-ignore lint: noProcessEnv
   runtimeEnv: process.env,
