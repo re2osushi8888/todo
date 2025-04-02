@@ -9,8 +9,12 @@ GET {{baseUrl}}/items
 GET {{baseUrl}}/items/{{itemId}}
 
 
-### POST
+### POST create
+// auth/signin APIでトークンを取得しておく
+
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NWFkMTkzZS0zZTdmLTQzOTAtYWM3Ni00ZmEyZGY5NGE5YWYiLCJ1c2VybmFtZSI6InRlc3QtdXNlcjEiLCJzdGF0dXMiOiJGUkVFIiwiaWF0IjoxNzQzNTk1NzAzLCJleHAiOjE3NDM1OTkzMDN9.DB17q6U-61MjIraEbl3rT61Dr8-Joj_Q2voNGsoqTIk
 POST {{baseUrl}}/items
+Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
