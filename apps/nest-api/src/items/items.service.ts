@@ -47,7 +47,7 @@ export class ItemsService {
     await this.prismaService.item.delete({
       where: {
         id,
-        userId
+        userId,
       },
     });
   }
