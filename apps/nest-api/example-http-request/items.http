@@ -5,14 +5,14 @@
 GET {{baseUrl}}/items
 
 ### FindById
-@itemId = 4a4c7955-5f89-4f21-946e-c14e9ca45bc4
+@itemId = 297d825a-9863-4664-a4f0-0344fe4c704c
 GET {{baseUrl}}/items/{{itemId}}
 
 
 ### POST create
 // auth/signin APIでトークンを取得しておく
 
-@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NWFkMTkzZS0zZTdmLTQzOTAtYWM3Ni00ZmEyZGY5NGE5YWYiLCJ1c2VybmFtZSI6InRlc3QtdXNlcjEiLCJzdGF0dXMiOiJGUkVFIiwiaWF0IjoxNzQzNTk1NzAzLCJleHAiOjE3NDM1OTkzMDN9.DB17q6U-61MjIraEbl3rT61Dr8-Joj_Q2voNGsoqTIk
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NWFkMTkzZS0zZTdmLTQzOTAtYWM3Ni00ZmEyZGY5NGE5YWYiLCJ1c2VybmFtZSI6InRlc3QtdXNlcjEiLCJzdGF0dXMiOiJGUkVFIiwiaWF0IjoxNzQzNjAwNDkxLCJleHAiOjE3NDM2MDQwOTF9.ye4HjFjM11kQYT3fePhvYmHnHbJQbMGJ6bMEl8-a2SE
 POST {{baseUrl}}/items
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
@@ -24,6 +24,8 @@ Content-Type: application/json
 
 ### PUT
 PUT {{baseUrl}}/items/{{itemId}}
+Authorization: Bearer {{authToken}}
 
 ### DELETE
 DELETE {{baseUrl}}/items/{{itemId}}
+Authorization: Bearer {{authToken}}
