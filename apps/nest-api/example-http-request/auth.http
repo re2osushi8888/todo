@@ -11,3 +11,12 @@ Content-Type: application/json
   "password": "TestUser#1",
   "status": "FREE"
 }
+
+### POST signIn
+POST {{baseUrl}}/auth/signin
+Content-Type: application/json
+
+{
+  "email": "test-user@example.com",
+  "password": "TestUser#1"
+}
