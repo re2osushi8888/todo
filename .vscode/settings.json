@@ -6,5 +6,6 @@
     "nodenext",
     "signup",
     "unplugin"
-  ]
+  ],
+  "vitest.disableWorkspaceWarning": true
 }

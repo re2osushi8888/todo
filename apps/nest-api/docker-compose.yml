@@ -20,6 +20,8 @@ services:
       - nest-app-network
     environment:
       DATABASE_URL: "postgresql://nestjsuser:nestjspass@postgres:5432/fleamarket?schema=public"
+      PORT: 3000
+      JWT_SECRET: 71a0a5370f6022f4b5827220644d2d74b43111a2696eaf3d50365ef4a09549ef
     depends_on:
       - postgres
 

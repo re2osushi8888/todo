@@ -6,7 +6,7 @@ import { env } from './env';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   // 全てのドメインから許可するCORSの設定
-  app.enableCors()
+  app.enableCors();
 
   // 一部のドメインからGETとPOSTだけ許可するCORSの設定
   // app.enableCors({
