@@ -5,6 +5,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { ItemsService } from './items.service';
 import { Item, ItemStatus } from '@prisma/client';
+import { NotFoundException } from '@nestjs/common/exceptions';
 
 const mockPrismaService = {
   item: {
@@ -70,6 +71,13 @@ describe('ItemsService', () => {
           id: item.id,
         },
       });
+    });
+    it('異常系： 商品が存在しない', async () => {
+      mockPrismaService.item.findUnique.mockResolvedValueOnce(null);
+
+      await expect(itemsService.findById('test-id1')).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 });
