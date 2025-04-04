@@ -2,12 +2,14 @@ import { AuthModule } from '@/auth/auth.module';
 import { PrismaModule } from '@/prisma/prisma.module';
 import { PrismaService } from '@/prisma/prisma.service';
 import { Test, TestingModule } from '@nestjs/testing';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { ItemsService } from './items.service';
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { Item, ItemStatus } from '@prisma/client';
 
 const mockPrismaService = {
   item: {
     findMany: vi.fn(),
+    findUnique: vi.fn(),
   },
 };
 
@@ -41,8 +43,33 @@ describe('ItemsService', () => {
 
       const expected = [1];
       const result = await itemsService.findAll();
-      
+
       expect(result).toEqual(expected);
+    });
+  });
+  describe('findById', () => {
+    it('正常系', async () => {
+      const item: Item = {
+        id: 'test-id1',
+        name: 'test-item1',
+        price: 100,
+        description: '',
+        status: ItemStatus.ON_SALE,
+        createdAt: new Date('2024-01-01'),
+        updatedAt: new Date('2024-01-01'),
+        userId: 'test-user1'
+      }
+      mockPrismaService.item.findUnique.mockResolvedValueOnce(item);
+
+      const expected = item;
+      const result = await itemsService.findById(item.id);
+
+      expect(result).toEqual(expected);
+      expect(mockPrismaService.item.findUnique).toHaveBeenCalledWith({
+        where: {
+          id: item.id,
+        },
+      });
     });
   });
 });
