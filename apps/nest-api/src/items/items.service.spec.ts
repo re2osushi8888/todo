@@ -6,11 +6,13 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { ItemsService } from './items.service';
 import { Item, ItemStatus } from '@prisma/client';
 import { NotFoundException } from '@nestjs/common/exceptions';
+import { CreateItemDto } from './dto/create-item.dto';
 
 const mockPrismaService = {
   item: {
     findMany: vi.fn(),
     findUnique: vi.fn(),
+    create: vi.fn(),
   },
 };
 
@@ -78,6 +80,29 @@ describe('ItemsService', () => {
       await expect(itemsService.findById('test-id1')).rejects.toThrow(
         NotFoundException,
       );
+    });
+  });
+  describe('create', () => {
+    it('正常系', async () => {
+      const item: CreateItemDto = {
+        name: 'test-item1',
+        price: 100,
+        description: 'test-description',
+      };
+      const userId = 'test-user1';
+      mockPrismaService.item.create.mockResolvedValueOnce(item);
+
+      const expected = item;
+      const result = await itemsService.create(item, userId);
+
+      expect(result).toEqual(expected);
+      expect(mockPrismaService.item.create).toHaveBeenCalledWith({
+        data: {
+          ...item,
+          status: ItemStatus.ON_SALE,
+          userId,
+        },
+      });
     });
   });
 });
