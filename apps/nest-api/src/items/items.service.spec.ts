@@ -13,6 +13,7 @@ const mockPrismaService = {
     findMany: vi.fn(),
     findUnique: vi.fn(),
     create: vi.fn(),
+    update: vi.fn(),
   },
 };
 
@@ -101,6 +102,41 @@ describe('ItemsService', () => {
           ...item,
           status: ItemStatus.ON_SALE,
           userId,
+        },
+      });
+    });
+  });
+  describe('updateStatus', () => {
+    it('正常系', async () => {
+      const item: Item = {
+        id: 'test-id1',
+        name: 'test-item1',
+        price: 100,
+        description: 'test-description',
+        status: ItemStatus.ON_SALE,
+        createdAt: new Date('2024-01-01'),
+        updatedAt: new Date('2024-01-01'),
+        userId: 'test-user1',
+      };
+      mockPrismaService.item.update.mockResolvedValueOnce({
+        ...item,
+        status: ItemStatus.SOLD_OUT,
+      });
+
+      const expected = {
+        ...item,
+        status: ItemStatus.SOLD_OUT,
+      };
+      const result = await itemsService.updateStatus(item.id);
+
+      expect(result).toEqual(expected);
+      expect(result.status).toBe(ItemStatus.SOLD_OUT);
+      expect(mockPrismaService.item.update).toHaveBeenCalledWith({
+        data: {
+          status: ItemStatus.SOLD_OUT,
+        },
+        where: {
+          id: item.id,
         },
       });
     });
