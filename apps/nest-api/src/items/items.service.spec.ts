@@ -1,12 +1,12 @@
 import { AuthModule } from '@/auth/auth.module';
 import { PrismaModule } from '@/prisma/prisma.module';
 import { PrismaService } from '@/prisma/prisma.service';
-import { Test, TestingModule } from '@nestjs/testing';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { ItemsService } from './items.service';
-import { Item, ItemStatus } from '@prisma/client';
 import { NotFoundException } from '@nestjs/common/exceptions';
+import { Test, TestingModule } from '@nestjs/testing';
+import { Item, ItemStatus } from '@prisma/client';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { CreateItemDto } from './dto/create-item.dto';
+import { ItemsService } from './items.service';
 
 const mockPrismaService = {
   item: {
@@ -14,6 +14,7 @@ const mockPrismaService = {
     findUnique: vi.fn(),
     create: vi.fn(),
     update: vi.fn(),
+    delete: vi.fn(),
   },
 };
 
@@ -61,8 +62,8 @@ describe('ItemsService', () => {
         status: ItemStatus.ON_SALE,
         createdAt: new Date('2024-01-01'),
         updatedAt: new Date('2024-01-01'),
-        userId: 'test-user1'
-      }
+        userId: 'test-user1',
+      };
       mockPrismaService.item.findUnique.mockResolvedValueOnce(item);
 
       const expected = item;
@@ -137,6 +138,20 @@ describe('ItemsService', () => {
         },
         where: {
           id: item.id,
+        },
+      });
+    });
+  });
+  describe('delete', () => {
+    it('正常系', async () => {
+      const id = 'test-id1';
+      const userId = 'test-user1';
+      await itemsService.delete(id, userId);
+
+      expect(mockPrismaService.item.delete).toHaveBeenCalledWith({
+        where: {
+          id,
+          userId,
         },
       });
     });
