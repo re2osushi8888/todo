@@ -64,6 +64,6 @@
     "unplugin-swc": "^1.5.1",
     "vitest": "^3.0.9",
     "vitest-tsconfig-paths": "^3.4.1",
-    "zod-to-openapi": "^0.2.1"
+    "zod-openapi": "^4.2.4"
   }
 }
