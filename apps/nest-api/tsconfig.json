@@ -6,7 +6,8 @@
       ]
     },
     "types": [
-      "vitest/globals"
+      "vitest/globals",
+      "node"
     ],
     "module": "NodeNext",
     "moduleResolution": "nodenext",
