@@ -22,7 +22,8 @@
 				"Prisma.prisma",
 				"humao.rest-client",
 				"ms-azuretools.vscode-docker",
-				"deinsoftware.arrow-function-snippets"
+				"deinsoftware.arrow-function-snippets",
+				"Arjun.swagger-viewer"
 			],
 			"settings": {
 				"editor.formatOnSave": true,
