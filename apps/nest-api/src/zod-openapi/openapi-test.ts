@@ -1,6 +1,10 @@
 import 'zod-openapi/extend';
+import fs from 'fs';
+import path from 'path';
 import { z } from 'zod';
 import { createDocument } from 'zod-openapi';
+
+import { stringify } from 'yaml';
 
 const jobId = z.string().openapi({
   description: 'A unique identifier for a job',
@@ -40,3 +44,8 @@ const document = createDocument({
     },
   },
 });
+
+const yaml = stringify(document, { aliasDuplicateObjects: false });
+
+// eslint-disable-next-line no-sync
+fs.writeFileSync(path.join(__dirname, 'openapi.yml'), yaml);
